@@ -1,7 +1,6 @@
-import pprint
-from plansza import print_board
-from plansza import check_win
-import sys
+from functions import print_board
+from functions import check_win
+
 
 global win
 win = False

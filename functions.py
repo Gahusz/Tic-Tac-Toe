@@ -28,9 +28,11 @@ def check_win(board):
         if all(x == 'X' for x in values[i:i+3]):
             print('X wins!')
             win = True
+            sys.exit()
         if all(o == 'O' for o in values[i:i+3]):
             print('O wins!')
             win = True
+            sys.exit()
 
     #vertical
 
@@ -38,9 +40,11 @@ def check_win(board):
         if all(x == 'X' for x in values[i::3]): #start:stop:step i::3 is start from i end empty step 3
             print('X wins!')
             win = True
+            sys.exit()
         if all(o == 'O' for o in values[i::3]):
             print('O wins!')
             win = True
+            sys.exit()
 
 
     # diagonally
@@ -50,26 +54,31 @@ def check_win(board):
     if all(values[x] == 'X' for x in diagonal1): #if I dont write =='X' it will check if field is empty only
         print('X wins!')
         win = True
+        sys.exit()
     if all(values[o] == 'O' for o in diagonal1):
         print('O wins!')
         win = True
+        sys.exit()
     if all(values[x] == 'X' for x in diagonal2):
         print('X wins!')
         win = True
+        sys.exit()
     if all(values[o] == 'O' for o in diagonal2):
         print('O wins!')
         win = True
+        sys.exit()
 
-        if win:
-            print('Do you want to play again? 1 - yes 2 - no')
-            again = input()
-            if again == '1':
-                y=' '
-                board1 = dict.fromkeys(board1,  y)
-                win=False
-            else:
-                print('Please write \'1\' or \'2\'')
-            if again == '2':
-                sys.exit()
-            else:
-                print('Please write \'1\' or \'2\'')
+
+        # if win:
+        #     while True:
+        #         print('Do you want to play again? 1 - yes 2 - no')
+        #         again = input()
+        #         if again == '1':
+        #             y=' '
+        #             board1 = dict.fromkeys(board1,  y)
+        #             win = False
+        #             break
+        # elif again == '2':
+        #     sys.exit()
+        # else:
+        #     print('Please write \'1\' or \'2\'')
