@@ -44,35 +44,27 @@ print('choose field please!: ' + str(list(board1.keys())))
 while True:
     if starts== 'X':
         field = input()
-        values = list(board1.values())
         if field in board1:
-            if board1[field]==' ':
-                board1[field]='X'
+            if board1[field] == ' ':
+                board1[field] = 'X'
                 print_board(board1)
                 check_win(board1)
-                if win:
-                    break
-                else:
-                    starts='O'
+                starts='O'
             else:
                 print('This field is taken. Choose other field')
 
         else:
             print('Wrong field.' + 'Choose field from: ' + str(list(board1.keys())))
 
-
-    elif starts == 'O':
+    else:
+        starts == 'O'
         field = input()
-        values = list(board1.values())
         if field in board1:
             if board1[field] == ' ':
                 board1[field] = 'O'
                 print_board(board1)
                 check_win(board1)
-                if win:
-                    break
-                else:
-                    starts = 'X'
+                starts='X'
             else:
                 print('This field is taken. Choose other field')
         else:
