@@ -1,18 +1,16 @@
-
-
-import plansza
+import pprint
 from plansza import print_board
 from plansza import check_win
-#import numpy
-global win
+import sys
 
+global win
+win = False
+global board1
 board1 = {'1': ' ', '2': ' ', '3': ' ',
           '4': ' ', '5': ' ', '6': ' ',
           '7': ' ', '8': ' ', '9': ' '}
 
-#pprint.pprint(board1)
-#print_board(board1)
-
+print_board(board1)
 
 print('Tic Tac Toe game :) Do you want X or O? Type 1 - X, 2 - O and press enter')
 
@@ -41,7 +39,7 @@ print('4' + '|' + '5' + '|' + '6')
 print('-----')
 print('7' + '|' + '8' + '|' + '9')
 print('-----')
-print('choose field please!: 1,2,3,4,5,6,7,8 or 9')
+print('choose field please!: ' + str(list(board1.keys())))
 
 while True:
     if starts== 'X':
@@ -50,15 +48,18 @@ while True:
         if field in board1:
             if board1[field]==' ':
                 board1[field]='X'
-                check_win()
-                if win==True:
+                print_board(board1)
+                check_win(board1)
+                if win:
                     break
                 else:
                     starts='O'
             else:
                 print('This field is taken. Choose other field')
+
         else:
-            print('Wrong field.' + 'Choose field from: ' + list(board1.keys()))
+            print('Wrong field.' + 'Choose field from: ' + str(list(board1.keys())))
+
 
     elif starts == 'O':
         field = input()
@@ -66,22 +67,13 @@ while True:
         if field in board1:
             if board1[field] == ' ':
                 board1[field] = 'O'
-                check_win()
-                if win==True:
+                print_board(board1)
+                check_win(board1)
+                if win:
                     break
                 else:
-                    starts='X'
+                    starts = 'X'
+            else:
+                print('This field is taken. Choose other field')
         else:
-            print('This field is taken. Choose other field')
-    else:
-        print('Wrong field.' + 'Choose field from: ' + list(board1.keys()))
-
-
-#indent - akapit
-
-check_win()
-
-
-
-
-
+            print('Wrong field.' + 'Choose field from: ' + str(list(board1.keys())))

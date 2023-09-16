@@ -1,5 +1,5 @@
 import numpy
-import pprint
+import sys
 def print_board(board):
     print('-----')
     print(board['1'] + '|' + board['2'] + '|' + board['3'])
@@ -10,14 +10,10 @@ def print_board(board):
     print('-----')
 
 
-
-def check_win():
+def check_win(board):
     global win
-    win = False
-    board1 = {'1': ' ', '2': ' ', '3': ' ',
-              '4': ' ', '5': ' ', '6': ' ',
-              '7': ' ', '8': ' ', '9': ' '}
-    values = list(board1.values())
+    global board1
+    values = list(board.values())
 
     #horizontal
 
@@ -31,20 +27,20 @@ def check_win():
     for i in numpy.arange(0, len(values), 3):
         if all(x == 'X' for x in values[i:i+3]):
             print('X wins!')
-            win=True
+            win = True
         if all(o == 'O' for o in values[i:i+3]):
             print('O wins!')
-            win=True
+            win = True
 
     #vertical
 
     for i in numpy.arange(0, 3):
         if all(x == 'X' for x in values[i::3]): #start:stop:step i::3 is start from i end empty step 3
             print('X wins!')
-            x=True
+            win = True
         if all(o == 'O' for o in values[i::3]):
             print('O wins!')
-            x=True
+            win = True
 
 
     # diagonally
@@ -53,13 +49,25 @@ def check_win():
 
     if all(values[x] == 'X' for x in diagonal1): #if I dont write =='X' it will check if field is empty only
         print('X wins!')
-        x = True
+        win = True
     if all(values[o] == 'O' for o in diagonal1):
         print('O wins!')
-        x = True
+        win = True
     if all(values[x] == 'X' for x in diagonal2):
         print('X wins!')
-        x = True
+        win = True
     if all(values[o] == 'O' for o in diagonal2):
         print('O wins!')
-        x = True
+        win = True
+
+        if win:
+            print('Do you want to play again? 1 - yes 2 - no')
+            again = input()
+            if again == '1':
+                y=' '
+                board1 = dict.fromkeys(board1,  y)
+                win=False
+            if again == '2':
+                sys.exit()
+            else:
+                print('Please write \'1\' or \'2\'')
