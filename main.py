@@ -1,14 +1,14 @@
 from functions import who_starts, print_board, choosing_field
 
+from functions import board1
+
 starts='X'
 
 win = False
 
 
-#dictionary
-board1 = {'1': ' ', '2': ' ', '3': ' ',
-          '4': ' ', '5': ' ', '6': ' ',
-          '7': ' ', '8': ' ', '9': ' '}
+
+
 
 print_board(board1)
 

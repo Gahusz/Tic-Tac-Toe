@@ -1,5 +1,11 @@
 import numpy
 import sys
+
+#dictionary
+board1 = {'1': ' ', '2': ' ', '3': ' ',
+          '4': ' ', '5': ' ', '6': ' ',
+          '7': ' ', '8': ' ', '9': ' '}
+
 def print_board(board):
     print('-----')
     print(board['1'] + '|' + board['2'] + '|' + board['3'])
@@ -32,7 +38,7 @@ def who_starts():
 
 #############################################################
 def choosing_field(starting):
-    global board1
+
     #nested functions
     def check_win(board):
         global win
