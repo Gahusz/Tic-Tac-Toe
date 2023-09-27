@@ -1,36 +1,20 @@
-from functions import print_board
-from functions import check_win
+from functions import who_starts, print_board, choosing_field
 
+starts='X'
 
-global win
 win = False
-global board1
+
+
+#dictionary
 board1 = {'1': ' ', '2': ' ', '3': ' ',
           '4': ' ', '5': ' ', '6': ' ',
           '7': ' ', '8': ' ', '9': ' '}
 
 print_board(board1)
 
-print('Tic Tac Toe game :) Do you want X or O? Type 1 - X, 2 - O and press enter')
+who_starts()
 
-
-
-#while True is infinite loop which can be stopped by for example 'break'
-while True:
-    who_starts = input()
-    if who_starts == '1':
-        starts = 'X'
-        break
-    elif who_starts == '2':
-        starts = 'O'
-        break
-    else:
-        print('Write \'1\' or \'2\' please!')
-        print('Do you want X or O? 1 - X, 2 - O and enter')
-
-
-
-print(who_starts)
+print(starts)
 print('-----')
 print('1' + '|' + '2' + '|' + '3')
 print('-----')
@@ -40,31 +24,4 @@ print('7' + '|' + '8' + '|' + '9')
 print('-----')
 print('choose field please!: ' + str(list(board1.keys())))
 
-while True:
-    if starts== 'X':
-        field = input()
-        if field in board1:
-            if board1[field] == ' ':
-                board1[field] = 'X'
-                print_board(board1)
-                check_win(board1)
-                starts='O'
-            else:
-                print('This field is taken. Choose other field')
-
-        else:
-            print('Wrong field.' + 'Choose field from: ' + str(list(board1.keys())))
-
-    else:
-        starts == 'O'
-        field = input()
-        if field in board1:
-            if board1[field] == ' ':
-                board1[field] = 'O'
-                print_board(board1)
-                check_win(board1)
-                starts='X'
-            else:
-                print('This field is taken. Choose other field')
-        else:
-            print('Wrong field.' + 'Choose field from: ' + str(list(board1.keys())))
+choosing_field(starts)

@@ -9,76 +9,127 @@ def print_board(board):
     print(board['7'] + '|' + board['8'] + '|' + board['9'])
     print('-----')
 
+def who_starts():
+    global starts
+    print('Tic Tac Toe game :) Do you want X or O? Type \'1\' for X, \'2\' for O and press enter')
 
-def check_win(board):
-    global win
+# if I name inside function variable with the same name as global variable I will shadow it (przesłonięcie)
+
+#while True is infinite loop which can be stopped by for example 'break'
+    while True:
+        starts = input()
+        if starts == '1':
+            starts = 'X'
+            break
+        elif starts == '2':
+            starts = 'O'
+            break
+        else:
+            print('Write \'1\' or \'2\' please!')
+            print('Do you want X or O? 1 - X, 2 - O and enter')
+
+####################################################################
+
+#############################################################
+def choosing_field(starting):
     global board1
-    values = list(board.values())
+    #nested functions
+    def check_win(board):
+        global win
+        values = list(board.values())
 
-    #horizontal
+        # horizontal
 
-    # THIS IS WRONG beacuse I can't compare to single character to get good result
-    # for i in numpy.arange(0, len(values), 3):
-    #     if values[i:i+2] == 'X':
-    #         print('X wins!')
-    #     if values[i:i+2] == 'O':
-    #         print('O wins!')
-    #I have to use list comprehension
-    for i in numpy.arange(0, len(values), 3):
-        if all(x == 'X' for x in values[i:i+3]):
+        # THIS IS WRONG beacuse I can't compare to single character to get good result
+        # for i in numpy.arange(0, len(values), 3):
+        #     if values[i:i+2] == 'X':
+        #         print('X wins!')
+        #     if values[i:i+2] == 'O':
+        #         print('O wins!')
+        # I have to use list comprehension
+        for i in numpy.arange(0, len(values), 3):
+            if all(x == 'X' for x in values[i:i + 3]):
+                print('X wins!')
+                win = True
+                sys.exit()
+            if all(o == 'O' for o in values[i:i + 3]):
+                print('O wins!')
+                win = True
+                sys.exit()
+
+        # vertical
+
+        for i in numpy.arange(0, 3):
+            if all(x == 'X' for x in values[i::3]):  # start:stop:step i::3 is start from i end empty step 3
+                print('X wins!')
+                win = True
+                sys.exit()
+            if all(o == 'O' for o in values[i::3]):
+                print('O wins!')
+                win = True
+                sys.exit()
+
+        # diagonally
+        diagonal1 = [0, 4, 8]
+        diagonal2 = [2, 4, 6]
+
+        if all(values[x] == 'X' for x in diagonal1):  # if I dont write =='X' it will check if field is empty only
             print('X wins!')
             win = True
             sys.exit()
-        if all(o == 'O' for o in values[i:i+3]):
+        if all(values[o] == 'O' for o in diagonal1):
+            print('O wins!')
+            win = True
+            sys.exit()
+        if all(values[x] == 'X' for x in diagonal2):
+            print('X wins!')
+            win = True
+            sys.exit()
+        if all(values[o] == 'O' for o in diagonal2):
             print('O wins!')
             win = True
             sys.exit()
 
-    #vertical
+            # if win:
+            #     while True:
+            #         print('Do you want to play again? 1 - yes 2 - no')
+            #         again = input()
+            #         if again == '1':
+            #             y=' '
+            #             board1 = dict.fromkeys(board1,  y)
+            #             win = False
+            #             break
+            # elif again == '2':
+            #     sys.exit()
+            # else:
+            #     print('Please write \'1\' or \'2\'')
+#########################################################
+    while True:
+        if starting == 'X':
+            field = input()
+            if field in board1:
+                if board1[field] == ' ':
+                    board1[field] = 'X'
+                    print_board(board1)
+                    check_win(board1)
+                    starting = 'O'
+                else:
+                    print('This field is taken. Choose other field')
 
-    for i in numpy.arange(0, 3):
-        if all(x == 'X' for x in values[i::3]): #start:stop:step i::3 is start from i end empty step 3
-            print('X wins!')
-            win = True
-            sys.exit()
-        if all(o == 'O' for o in values[i::3]):
-            print('O wins!')
-            win = True
-            sys.exit()
+            else:
+                print('Wrong field.' + 'Choose field from: ' + str(list(board1.keys())))
 
+        else:
+            starting = 'O'
+            field = input()
+            if field in board1:
+                if board1[field] == ' ':
+                    board1[field] = 'O'
+                    print_board(board1)
+                    check_win(board1)
+                    starting = 'X'
+                else:
+                    print('This field is taken. Choose other field')
+            else:
+                print('Wrong field.' + 'Choose field from: ' + str(list(board1.keys())))
 
-    # diagonally
-    diagonal1=[0, 4, 8]
-    diagonal2=[2, 4, 6]
-
-    if all(values[x] == 'X' for x in diagonal1): #if I dont write =='X' it will check if field is empty only
-        print('X wins!')
-        win = True
-        sys.exit()
-    if all(values[o] == 'O' for o in diagonal1):
-        print('O wins!')
-        win = True
-        sys.exit()
-    if all(values[x] == 'X' for x in diagonal2):
-        print('X wins!')
-        win = True
-        sys.exit()
-    if all(values[o] == 'O' for o in diagonal2):
-        print('O wins!')
-        win = True
-        sys.exit()
-
-
-        # if win:
-        #     while True:
-        #         print('Do you want to play again? 1 - yes 2 - no')
-        #         again = input()
-        #         if again == '1':
-        #             y=' '
-        #             board1 = dict.fromkeys(board1,  y)
-        #             win = False
-        #             break
-        # elif again == '2':
-        #     sys.exit()
-        # else:
-        #     print('Please write \'1\' or \'2\'')
